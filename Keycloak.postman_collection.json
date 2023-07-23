@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "a7be69bb-a9a5-4dec-af1e-8cc74b76ac2c",
+		"name": "Keycloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27657661",
+		"_collection_link": "https://restless-shuttle-994848.postman.co/workspace/allweb~d812a824-5769-4790-b94e-4e344f3fc0ba/collection/27657661-a7be69bb-a9a5-4dec-af1e-8cc74b76ac2c?action=share&creator=27657661&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "client_id_client_secret",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "client-sangkhim",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "7AGvTguwleNzQ89VDDbc6aT8n8GRpnZ0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:18080/realms/realm-sangkhim/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"realms",
+						"realm-sangkhim",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "username_password",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "client-sangkhim",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "7AGvTguwleNzQ89VDDbc6aT8n8GRpnZ0",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:18080/realms/realm-sangkhim/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"realms",
+						"realm-sangkhim",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh_token",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "client-sangkhim",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "7AGvTguwleNzQ89VDDbc6aT8n8GRpnZ0",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJlYmU5Yzg1Ni0xZGRkLTRlYzgtYTY4YS04MjA4ZGY2YTY3MzkifQ.eyJleHAiOjE2ODc3NzcxNDMsImlhdCI6MTY4Nzc3NTM0MywianRpIjoiYjFlNjhkNTAtYjU0MS00Njg3LThmN2MtZmYyYjdjZDI0NGFkIiwiaXNzIjoiaHR0cDovLzEwLjIuNTAuMTQ2OjgwMjAvcmVhbG1zL2RlbW8tZmRqLWlkZW50aWZpY2F0aW9uIiwiYXVkIjoiaHR0cDovLzEwLjIuNTAuMTQ2OjgwMjAvcmVhbG1zL2RlbW8tZmRqLWlkZW50aWZpY2F0aW9uIiwic3ViIjoiMzM3OGQwYjgtNWNmZC00MDdhLTkzM2YtZjNmNzdhMTczNTI0IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImZkai1kZW1vIiwic2Vzc2lvbl9zdGF0ZSI6ImRmOWM1MjMzLTdkMTAtNGE2Yy1hNTE1LTY4N2MzNmU4Mzg1OCIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImRmOWM1MjMzLTdkMTAtNGE2Yy1hNTE1LTY4N2MzNmU4Mzg1OCJ9.4mt8bcZXQy50hHwWAHIzEL3GcxIu4GBGaqknlmTFVvo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:18080/realms/realm-sangkhim/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"realms",
+						"realm-sangkhim",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "revoke_token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "client-sangkhim",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "7AGvTguwleNzQ89VDDbc6aT8n8GRpnZ0",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfeFNsVjJlczlsQUNOdFBjM0NSOHRMNVBxUVo1TDRFd2E5SG1jRTNEWUNvIn0.eyJleHAiOjE2ODkzNjA4MzcsImlhdCI6MTY4OTMyNDgzNywianRpIjoiNmUyMTY3MWItMTJkMy00ZWUzLWFhMTAtMDUwOTIwYmVkNTkwIiwiaXNzIjoiaHR0cHM6Ly9mZGouYWxsd2ViLmNvbS5raDo4MDcwL3JlYWxtcy9kZW1vLWZkai1pZGVudGlmaWNhdGlvbiIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJjOTViMzc0Ni03OWZjLTQ2YzktODBiZC0xN2M5YjhkN2MzNzYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmZGotcHJvZmlsZS1tYW5hZ2VtZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImIyZmJiMTQzLTU3NTQtNDM1MS04NWE2LTg2OTdhMDcyOGZkNSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1kZW1vLWZkai1pZGVudGlmaWNhdGlvbiIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJiMmZiYjE0My01NzU0LTQzNTEtODVhNi04Njk3YTA3MjhmZDUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InZpdGhvdUBmZGouZnIiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6InZpdGhvdUBmZGouZnIifQ.b9joTUh7dd5IN1qlk3IW2VgtKwdAITZ04m0h1frZj7g7VE2uKdt9vUTugD7s3I3J0YSivJXAlAKYdgva6E6MMjMQeqo5r6Vau-fxRVhjkZnT9qT_D3DXZ_JduGz8ffd_0VFrPST-a6UiWXZNin-GlugF7E12Txia59jxQswZUhXWm-IR71SsFP6-6c8Rup0ZzFN1WDJ9LKBdYo_wy1FgOPHp8V4MjiDON6h-srOxpsHP0mgSyjpbghTRaUge_ehK5qHsDlURQDwxnjwq3Gt4tk79_Y5fwDWmiNBGf65qVmWq_XN9l6HW1ZX-OCYcfeeQ7UG2xjfxdfxUwOdfEqoFjg",
+							"type": "text"
+						},
+						{
+							"key": "tok",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:18080/realms/realm-sangkhim/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"realms",
+						"realm-sangkhim",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "client-sangkhim",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "7AGvTguwleNzQ89VDDbc6aT8n8GRpnZ0",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJlYmU5Yzg1Ni0xZGRkLTRlYzgtYTY4YS04MjA4ZGY2YTY3MzkifQ.eyJleHAiOjE2ODkzMjYyMTQsImlhdCI6MTY4OTMyNDQxNCwianRpIjoiMmY3NzJlMWQtNGYyMi00MjQ0LWFkZWQtM2ExMjUzNjJkMzM2IiwiaXNzIjoiaHR0cHM6Ly9mZGouYWxsd2ViLmNvbS5raDo4MDcwL3JlYWxtcy9kZW1vLWZkai1pZGVudGlmaWNhdGlvbiIsImF1ZCI6Imh0dHBzOi8vZmRqLmFsbHdlYi5jb20ua2g6ODA3MC9yZWFsbXMvZGVtby1mZGotaWRlbnRpZmljYXRpb24iLCJzdWIiOiJjOTViMzc0Ni03OWZjLTQ2YzktODBiZC0xN2M5YjhkN2MzNzYiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoiZmRqLXByb2ZpbGUtbWFuYWdlbWVudCIsInNlc3Npb25fc3RhdGUiOiI2YWJlNjA3ZS02NTMwLTQ4NDMtOTYwZi02MDYwMjM2YmVmMDkiLCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI2YWJlNjA3ZS02NTMwLTQ4NDMtOTYwZi02MDYwMjM2YmVmMDkifQ.tz1W3i9nqIkLe9aThFiQdPynfVlP28aEmsyd1pZIc8Q",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:18080/realms/realm-sangkhim/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"realms",
+						"realm-sangkhim",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
