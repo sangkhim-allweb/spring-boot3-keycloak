@@ -3,6 +3,7 @@ package com.sangkhim.spring_boot3_keycloak.exception.base;
 import com.sangkhim.spring_boot3_keycloak.exception.BadRequestException;
 import com.sangkhim.spring_boot3_keycloak.exception.DataNotFoundException;
 import com.sangkhim.spring_boot3_keycloak.exception.DuplicateException;
+import com.sangkhim.spring_boot3_keycloak.exception.TooManyRequestsException;
 import com.sangkhim.spring_boot3_keycloak.exception.dto.ErrorResponse;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class BaseControllerAdvice {
 
   @ExceptionHandler({DataNotFoundException.class})
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public ErrorResponse noHandlerFoundException(Exception ex) {
+  public ErrorResponse dataNotFoundException(Exception ex) {
     LOGGER.debug(ex.getMessage(), ex.getCause());
     return new ErrorResponse(
         String.valueOf(HttpStatus.NOT_FOUND.value()), ex.getMessage(), TIMESTAMP);
@@ -49,6 +50,13 @@ public class BaseControllerAdvice {
   public ErrorResponse handleBadRequestException(Exception ex) {
     return new ErrorResponse(
         String.valueOf(HttpStatus.BAD_REQUEST.value()), ex.getMessage(), TIMESTAMP);
+  }
+
+  @ExceptionHandler({TooManyRequestsException.class})
+  @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+  public ErrorResponse handleTooManyRequestsException(Exception ex) {
+    return new ErrorResponse(
+        String.valueOf(HttpStatus.TOO_MANY_REQUESTS.value()), ex.getMessage(), TIMESTAMP);
   }
 
   @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -69,8 +77,8 @@ public class BaseControllerAdvice {
         String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), ex.getMessage(), TIMESTAMP);
   }
 
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(MethodArgumentNotValidException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ErrorResponse handleValidationExceptionHandler(MethodArgumentNotValidException ex) {
     Map<String, String> errors = new HashMap<>();
     ex.getBindingResult()

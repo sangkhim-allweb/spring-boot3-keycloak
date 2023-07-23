@@ -1,7 +1,7 @@
 package com.sangkhim.spring_boot3_keycloak.controller;
 
 import com.sangkhim.spring_boot3_keycloak.config.RateLimitConfig;
-import com.sangkhim.spring_boot3_keycloak.exception.DataNotFoundException;
+import com.sangkhim.spring_boot3_keycloak.exception.TooManyRequestsException;
 import com.sangkhim.spring_boot3_keycloak.model.entity.Tag;
 import com.sangkhim.spring_boot3_keycloak.service.TagService;
 import com.sangkhim.spring_boot3_keycloak.utils.HttpUtils;
@@ -32,7 +32,7 @@ public class TagController {
       List<Tag> list = service.getAllTags();
       return new ResponseEntity<>(list, new HttpHeaders(), HttpStatus.OK);
     } else {
-      throw new DataNotFoundException(
+      throw new TooManyRequestsException(
           MessageFormat.format("Rate limit exceeded for IP ", String.valueOf(ip)));
     }
   }
