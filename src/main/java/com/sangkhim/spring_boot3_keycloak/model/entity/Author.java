@@ -1,6 +1,7 @@
 package com.sangkhim.spring_boot3_keycloak.model.entity;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Author {
+public class Author implements Serializable {
+
+  private static final long serialVersionUID = 7156526077883281623L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

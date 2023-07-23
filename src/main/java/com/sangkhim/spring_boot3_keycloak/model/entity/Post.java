@@ -3,6 +3,8 @@ package com.sangkhim.spring_boot3_keycloak.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +15,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Post implements Serializable {
+
+  private static final long serialVersionUID = 7156526087883281623L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
