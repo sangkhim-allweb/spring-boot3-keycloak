@@ -23,7 +23,7 @@ public class TagService {
 
   private final TagRepository tagRepository;
 
-  @Cacheable(value = "tags")
+    @Cacheable(value = "tags")
   public List<Tag> getAllTags() {
     LOG.info("Getting tags.");
 
@@ -31,7 +31,7 @@ public class TagService {
     return tagList;
   }
 
-  @Cacheable(value = "tags", key = "#id")
+    @Cacheable(value = "tags", key = "#id")
   public Tag getById(Long id) {
     LOG.info("Getting tag with ID {}.", id);
 
@@ -44,7 +44,7 @@ public class TagService {
     }
   }
 
-  @CachePut(value = "tags", key = "#tag.id")
+    @CachePut(value = "tags", key = "#tag.id")
   public Tag createOrUpdate(Tag tagRequest) {
     LOG.info("Create or update tag with id {}", tagRequest.getId());
 
