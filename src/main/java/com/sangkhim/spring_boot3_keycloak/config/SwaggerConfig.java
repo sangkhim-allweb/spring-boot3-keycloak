@@ -26,6 +26,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
   @Value("${keycloak.auth-server-url}")
   String authServerUrl;
+
   @Value("${keycloak.realm}")
   String realm;
 
