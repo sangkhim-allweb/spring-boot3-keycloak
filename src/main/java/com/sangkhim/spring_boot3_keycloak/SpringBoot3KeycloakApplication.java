@@ -6,9 +6,10 @@ import javax.cache.spi.CachingProvider;
 import org.ehcache.jsr107.EhcacheCachingProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-// @EnableCaching
+@EnableCaching
 public class SpringBoot3KeycloakApplication {
 
   public static void main(String[] args) {

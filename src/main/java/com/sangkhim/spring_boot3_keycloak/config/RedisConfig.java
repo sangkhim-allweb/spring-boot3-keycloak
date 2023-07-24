@@ -22,7 +22,7 @@ public class RedisConfig {
   }
 
   @Bean
-  public CacheManager cacheManager(Config config) {
+  public CacheManager cacheManagerRateLimiting(Config config) {
     CacheManager manager = Caching.getCachingProvider().getCacheManager();
     manager.createCache("cache", RedissonConfiguration.fromConfig(config));
     return manager;
