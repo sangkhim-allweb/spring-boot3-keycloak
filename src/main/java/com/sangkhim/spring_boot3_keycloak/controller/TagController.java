@@ -33,7 +33,7 @@ public class TagController {
       return new ResponseEntity<>(list, new HttpHeaders(), HttpStatus.OK);
     } else {
       throw new TooManyRequestsException(
-          MessageFormat.format("Rate limit exceeded for IP ", String.valueOf(ip)));
+          MessageFormat.format("Rate limit exceeded for IP {0}", String.valueOf(ip)));
     }
   }
 
