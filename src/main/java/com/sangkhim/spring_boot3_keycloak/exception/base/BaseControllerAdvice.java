@@ -3,7 +3,9 @@ package com.sangkhim.spring_boot3_keycloak.exception.base;
 import com.sangkhim.spring_boot3_keycloak.exception.BadRequestException;
 import com.sangkhim.spring_boot3_keycloak.exception.DataNotFoundException;
 import com.sangkhim.spring_boot3_keycloak.exception.DuplicateException;
+import com.sangkhim.spring_boot3_keycloak.exception.ForbiddenException;
 import com.sangkhim.spring_boot3_keycloak.exception.TooManyRequestsException;
+import com.sangkhim.spring_boot3_keycloak.exception.UnauthorizedException;
 import com.sangkhim.spring_boot3_keycloak.exception.dto.ErrorResponse;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -50,6 +52,20 @@ public class BaseControllerAdvice {
   public ErrorResponse handleBadRequestException(Exception ex) {
     return new ErrorResponse(
         String.valueOf(HttpStatus.BAD_REQUEST.value()), ex.getMessage(), TIMESTAMP);
+  }
+
+  @ExceptionHandler({UnauthorizedException.class})
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public ErrorResponse handleUnauthorizedException(Exception ex) {
+    return new ErrorResponse(
+        String.valueOf(HttpStatus.UNAUTHORIZED.value()), ex.getMessage(), TIMESTAMP);
+  }
+
+  @ExceptionHandler({ForbiddenException.class})
+  @ResponseStatus(HttpStatus.FORBIDDEN)
+  public ErrorResponse handleForbiddenException(Exception ex) {
+    return new ErrorResponse(
+        String.valueOf(HttpStatus.FORBIDDEN.value()), ex.getMessage(), TIMESTAMP);
   }
 
   @ExceptionHandler({TooManyRequestsException.class})
