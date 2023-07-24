@@ -43,3 +43,19 @@ jwt:
 keycloak:
   realm: realm-sangkhim
   auth-server-url: http://localhost:18080/realms/${keycloak.realm}/protocol/openid-connect/token
+
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: client-sangkhim
+      client-secret: 41OSOFH2IpsA29IEhDvbBIssWFbSsjP8
+      realm: realm-sangkhim
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health
+  endpoint:
+    startup:
+      enabled: true
