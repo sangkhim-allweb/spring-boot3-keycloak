@@ -42,7 +42,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     return new OpenAPI()
         .info(
             new Info()
-                .title("Spring Boot 3 H2")
+                .title("Spring Boot 3 Keycloak")
                 .description("")
                 .version("0.0.1")
                 .contact(new Contact().name("sangkhim").email("sangkhim@gmail.com")))
