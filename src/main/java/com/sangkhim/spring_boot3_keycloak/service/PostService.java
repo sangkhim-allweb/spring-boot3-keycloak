@@ -2,8 +2,11 @@ package com.sangkhim.spring_boot3_keycloak.service;
 
 import com.sangkhim.spring_boot3_keycloak.exception.BadRequestException;
 import com.sangkhim.spring_boot3_keycloak.exception.DataNotFoundException;
+import com.sangkhim.spring_boot3_keycloak.model.dto.PostDTO;
+import com.sangkhim.spring_boot3_keycloak.model.entity.Author;
 import com.sangkhim.spring_boot3_keycloak.model.entity.Post;
 import com.sangkhim.spring_boot3_keycloak.model.entity.Tag;
+import com.sangkhim.spring_boot3_keycloak.repository.AuthorRepository;
 import com.sangkhim.spring_boot3_keycloak.repository.PostRepository;
 import com.sangkhim.spring_boot3_keycloak.repository.TagRepository;
 import com.sangkhim.spring_boot3_keycloak.utils.PageUtils;
@@ -11,8 +14,11 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -23,7 +29,11 @@ public class PostService {
 
   private final Logger LOG = LoggerFactory.getLogger(getClass());
 
+  private final ModelMapper modelMapper;
+
   private final PostRepository postRepository;
+
+  private final AuthorRepository authorRepository;
 
   private final TagRepository tagRepository;
 
@@ -43,7 +53,10 @@ public class PostService {
     return postList;
   }
 
+  @Cacheable(value = "posts", key = "#id")
   public Post getById(Long id) {
+    LOG.info("Getting post with ID {}.", id);
+
     Optional<Post> post = postRepository.findById(id);
     if (post.isPresent()) {
       return post.get();
@@ -53,7 +66,10 @@ public class PostService {
     }
   }
 
-  public Post createOrUpdate(Post postRequest) {
+//  @CachePut(value = "posts", key = "#post.id")
+  public Post createOrUpdate(PostDTO postRequest) {
+    LOG.info("Create or update post with id {}", postRequest.getId());
+
     Optional<Post> existingPost = postRepository.findById(postRequest.getId());
 
     if (existingPost.isPresent()) {
@@ -61,13 +77,14 @@ public class PostService {
 
       postUpdate.setTitle(postRequest.getTitle());
       postUpdate.setBody(postRequest.getBody());
-
-      // save foreign key
-      postUpdate.setAuthor(postRequest.getAuthor());
+      if (postRequest.getAuthorId() != 0) {
+        Optional<Author> author = authorRepository.findById(postRequest.getAuthorId());
+        author.ifPresent(postUpdate::setAuthor);
+      }
 
       return postRepository.save(postUpdate);
     } else {
-      return postRepository.save(postRequest);
+      return postRepository.save(modelMapper.map(postRequest, Post.class));
     }
   }
 
@@ -122,7 +139,10 @@ public class PostService {
     }
   }
 
+  @CacheEvict(value = "posts", allEntries = true)
   public void deleteById(Long id) {
+    LOG.info("Delete post with id {}", id);
+
     Optional<Post> post = postRepository.findById(id);
     if (post.isPresent()) {
       postRepository.deleteById(id);

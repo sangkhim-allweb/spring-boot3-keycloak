@@ -1,5 +1,6 @@
 package com.sangkhim.spring_boot3_keycloak.controller;
 
+import com.sangkhim.spring_boot3_keycloak.model.dto.PostDTO;
 import com.sangkhim.spring_boot3_keycloak.model.entity.Post;
 import com.sangkhim.spring_boot3_keycloak.model.entity.Tag;
 import com.sangkhim.spring_boot3_keycloak.service.PostService;
@@ -31,8 +32,8 @@ public class PostController {
   }
 
   @PostMapping("/v1/posts")
-  public ResponseEntity<Post> createOrUpdate(@Valid @RequestBody Post post) {
-    Post updated = service.createOrUpdate(post);
+  public ResponseEntity<Post> createOrUpdate(@Valid @RequestBody PostDTO postDTO) {
+    Post updated = service.createOrUpdate(postDTO);
     return new ResponseEntity<>(updated, new HttpHeaders(), HttpStatus.OK);
   }
 

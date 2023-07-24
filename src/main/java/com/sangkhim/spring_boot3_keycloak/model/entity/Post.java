@@ -2,10 +2,9 @@ package com.sangkhim.spring_boot3_keycloak.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,12 +22,7 @@ public class Post implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "title", nullable = false)
-  @NotBlank(message = "Title is mandatory")
   private String title;
-
-  @Column(name = "body")
-  @NotBlank(message = "Body is mandatory")
   private String body;
 
   @ManyToOne
@@ -49,9 +43,7 @@ public class Post implements Serializable {
   }
 
   public void removeTag(long tagId) {
-    Tag tag = this.tagList.stream().filter(t -> t.getId() == tagId).findFirst().orElse(null);
-    if (tag != null) {
-      this.tagList.remove(tag);
-    }
+    Optional<Tag> tag = this.tagList.stream().filter(t -> t.getId() == tagId).findFirst();
+    tag.ifPresent(value -> this.tagList.remove(value));
   }
 }
