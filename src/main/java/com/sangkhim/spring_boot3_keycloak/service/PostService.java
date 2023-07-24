@@ -11,6 +11,9 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +21,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PostService {
 
+  private final Logger LOG = LoggerFactory.getLogger(getClass());
+
   private final PostRepository postRepository;
 
   private final TagRepository tagRepository;
 
+  @Cacheable(value = "posts")
   public List<Post> getAllPosts(String title) {
+    LOG.info("Getting posts.");
 
     Page<Post> postListWithPagination =
         postRepository.findAllPostsWithPagination(PageUtils.pageable(1, 10, "title", "ASC"));

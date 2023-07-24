@@ -25,7 +25,7 @@ public class Tag implements Serializable {
   @Column(name = "name")
   private String name;
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(
       name = "post_tags",
       joinColumns = @JoinColumn(name = "tag_id"),

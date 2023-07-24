@@ -36,7 +36,7 @@ public class Post implements Serializable {
   @JsonIgnoreProperties("postList")
   private Author author;
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(
       name = "post_tags",
       joinColumns = @JoinColumn(name = "post_id"),
