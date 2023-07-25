@@ -65,7 +65,7 @@ public class PostService {
     }
   }
 
-  @CacheEvict(value = "tags", allEntries = true)
+  @CacheEvict(value = "posts", allEntries = true)
   public Post createOrUpdate(PostDTO postRequest) {
     LOG.info("Create or update post with id {}", postRequest.getId());
 
