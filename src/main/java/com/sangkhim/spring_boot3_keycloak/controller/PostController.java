@@ -2,7 +2,6 @@ package com.sangkhim.spring_boot3_keycloak.controller;
 
 import com.sangkhim.spring_boot3_keycloak.model.dto.PostDTO;
 import com.sangkhim.spring_boot3_keycloak.model.entity.Post;
-import com.sangkhim.spring_boot3_keycloak.model.entity.Tag;
 import com.sangkhim.spring_boot3_keycloak.service.PostService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -35,23 +34,6 @@ public class PostController {
   public ResponseEntity<Post> createOrUpdate(@Valid @RequestBody PostDTO postDTO) {
     Post updated = service.createOrUpdate(postDTO);
     return new ResponseEntity<>(updated, new HttpHeaders(), HttpStatus.OK);
-  }
-
-  @GetMapping("/v1/posts/{id}/tags")
-  public ResponseEntity<List<Tag>> getAllTagsByPostId(@PathVariable(value = "id") Long id) {
-    List<Tag> tagList = service.getAllTagsByPostId(id);
-    return new ResponseEntity<>(tagList, new HttpHeaders(), HttpStatus.OK);
-  }
-
-  @PostMapping("/v1/posts/{id}/tags")
-  public ResponseEntity<Tag> addTag(@PathVariable("id") Long id, @RequestBody Tag tagRequest) {
-    Tag updated = service.addTag(id, tagRequest);
-    return new ResponseEntity<>(updated, new HttpHeaders(), HttpStatus.OK);
-  }
-
-  @DeleteMapping("/v1/posts/{id}/tags/{tagId}")
-  public void deleteTagFromPost(@PathVariable("id") Long id, @PathVariable("tagId") Long tagId) {
-    service.deleteTagFromPost(id, tagId);
   }
 
   @DeleteMapping("/v1/posts/{id}")
