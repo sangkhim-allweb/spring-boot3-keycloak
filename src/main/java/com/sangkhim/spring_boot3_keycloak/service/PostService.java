@@ -18,7 +18,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -66,7 +65,7 @@ public class PostService {
     }
   }
 
-//  @CachePut(value = "posts", key = "#post.id")
+  @CacheEvict(value = "tags", allEntries = true)
   public Post createOrUpdate(PostDTO postRequest) {
     LOG.info("Create or update post with id {}", postRequest.getId());
 
