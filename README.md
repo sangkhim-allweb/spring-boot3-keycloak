@@ -15,6 +15,9 @@
 
 ## Jenkins
     docker run -p 18090:8080 -p 50000:50000 jenkins/jenkins:lts
+    
+    /var/jenkins_home/secrets/initialAdminPassword
+    0690a031f41b4b9aa36c08aca1fb6b98
 
 ## other
     Google Java Format
