@@ -13,6 +13,11 @@
 
     https://medium.com/geekculture/using-keycloak-with-spring-boot-3-0-376fa9f60e0b
 
+## Redis Cache & Redis Rate Limiting
+    https://redis.io/docs/getting-started/install-stack/docker/
+
+    docker run --name redis -p 16379:6379 -d redis:7.0.12 --requirepass p@123456
+
 ## Jenkins
     docker run -p 18090:8080 -p 50000:50000 jenkins/jenkins:lts
     
