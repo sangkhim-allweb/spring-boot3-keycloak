@@ -13,7 +13,7 @@
 
     https://medium.com/geekculture/using-keycloak-with-spring-boot-3-0-376fa9f60e0b
 
-## Redis Cache & Redis Rate Limiting
+## Redis Cache & Rate Limiting
     https://redis.io/docs/getting-started/install-stack/docker/
 
     docker run --name redis -p 16379:6379 -d redis:7.0.12 --requirepass p@123456
@@ -26,7 +26,7 @@
 
     https://plugins.jenkins.io/blueocean/
 
-## other
+## Other
     Google Java Format
     SonaLint
     Disable import * (Settings -> Editor -> Code Syle -> Java -> Imports)
