@@ -13,6 +13,9 @@
 
     https://medium.com/geekculture/using-keycloak-with-spring-boot-3-0-376fa9f60e0b
 
+## Jenkins
+    docker run -p 18090:8080 -p 50000:50000 jenkins/jenkins:lts
+
 ## other
     Google Java Format
     SonaLint
