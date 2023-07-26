@@ -1,6 +1,6 @@
 package com.sangkhim.spring_boot3_keycloak.exception.dto;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 import lombok.*;
 
 /**
@@ -24,5 +24,5 @@ public class ErrorResponse {
   private String message;
 
   /** error cause timestamp */
-  private Instant timestamp;
+  private Timestamp timestamp;
 }

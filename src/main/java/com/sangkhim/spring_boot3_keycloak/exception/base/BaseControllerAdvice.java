@@ -7,9 +7,7 @@ import com.sangkhim.spring_boot3_keycloak.exception.ForbiddenException;
 import com.sangkhim.spring_boot3_keycloak.exception.TooManyRequestsException;
 import com.sangkhim.spring_boot3_keycloak.exception.UnauthorizedException;
 import com.sangkhim.spring_boot3_keycloak.exception.dto.ErrorResponse;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +24,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RestControllerAdvice
 public class BaseControllerAdvice {
 
-  public static final Instant TIMESTAMP =
-      LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
+  public static final Timestamp TIMESTAMP = new Timestamp(System.currentTimeMillis());
 
   @ExceptionHandler({NoHandlerFoundException.class})
   @ResponseStatus(HttpStatus.NOT_FOUND)

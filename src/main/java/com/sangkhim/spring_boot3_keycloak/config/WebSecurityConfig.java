@@ -22,6 +22,7 @@ public class WebSecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    // h2-console
     http.authorizeHttpRequests()
         .requestMatchers(toH2Console())
         .permitAll()
@@ -32,6 +33,7 @@ public class WebSecurityConfig {
         .headers()
         .frameOptions()
         .sameOrigin();
+
     http.authorizeHttpRequests()
         .requestMatchers(HttpMethod.GET, "/swagger-ui/**", "/v3/api-docs/**", "/actuator/**")
         .permitAll()
@@ -43,6 +45,11 @@ public class WebSecurityConfig {
         .authenticated();
     http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthConverter);
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+    // Exception handling
+    http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+    http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());
+
     return http.build();
   }
 }
