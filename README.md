@@ -19,6 +19,8 @@
     /var/jenkins_home/secrets/initialAdminPassword
     0690a031f41b4b9aa36c08aca1fb6b98
 
+    https://plugins.jenkins.io/blueocean/
+
 ## other
     Google Java Format
     SonaLint
