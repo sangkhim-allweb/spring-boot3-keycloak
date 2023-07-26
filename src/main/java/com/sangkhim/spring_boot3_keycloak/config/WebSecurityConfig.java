@@ -36,11 +36,7 @@ public class WebSecurityConfig {
         .headers(
             httpSecurityHeadersConfigurer ->
                 httpSecurityHeadersConfigurer.frameOptions(
-                    HeadersConfigurer.FrameOptionsConfig::disable))
-        .headers(
-            httpSecurityHeadersConfigurer ->
-                httpSecurityHeadersConfigurer.frameOptions(
-                    HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+                    HeadersConfigurer.FrameOptionsConfig::disable));
 
     http.securityMatcher("/v1/**")
         .authorizeHttpRequests(
