@@ -7,13 +7,14 @@ import io.github.bucket4j.Refill;
 import io.github.bucket4j.distributed.proxy.ProxyManager;
 import java.time.Duration;
 import java.util.function.Supplier;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class RateLimitConfig {
 
-  @Autowired public ProxyManager buckets;
+  private final ProxyManager buckets;
 
   public Bucket resolveBucket(String key) {
     Supplier<BucketConfiguration> configSupplier = getConfigSupplierForUser();
