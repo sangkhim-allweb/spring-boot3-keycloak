@@ -25,14 +25,14 @@ public class RateLimitingAspect {
   private final RateLimitConfig rateLimitConfig;
 
   @Around(value = "execution(* com.sangkhim.spring_boot3_keycloak.controller..*(..))")
-  public void aroundAdvice(ProceedingJoinPoint joinPoint) {
+  public Object aroundAdvice(ProceedingJoinPoint joinPoint) {
     HttpServletRequest request =
         ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     String ip = HttpUtils.getRequestIP(request);
     Bucket bucket = rateLimitConfig.resolveBucket("ip-" + ip);
     if (bucket.tryConsume(1)) {
       try {
-        joinPoint.proceed();
+        return joinPoint.proceed();
       } catch (Throwable e) {
         LOG.error("Exception: " + e.getMessage());
       }
@@ -45,5 +45,6 @@ public class RateLimitingAspect {
       throw new TooManyRequestsException(
           MessageFormat.format("Rate limit exceeded for IP {0}", String.valueOf(ip)));
     }
+    return null;
   }
 }
