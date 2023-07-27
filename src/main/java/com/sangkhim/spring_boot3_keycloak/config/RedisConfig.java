@@ -8,16 +8,30 @@ import javax.cache.CacheManager;
 import javax.cache.Caching;
 import org.redisson.config.Config;
 import org.redisson.jcache.configuration.RedissonConfiguration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class RedisConfig {
+
+  @Value("${spring.data.redis.host}")
+  String redisHost;
+
+  @Value("${spring.data.redis.port}")
+  String redisPort;
+
+  @Value("${spring.data.redis.password}")
+  String redisPassword;
+
   @Bean
   public Config config() {
     Config config = new Config();
-    config.useSingleServer().setAddress("redis://localhost:16379").setPassword("p@123456");
+    config
+        .useSingleServer()
+        .setAddress("redis://" + redisHost + ":" + redisPort)
+        .setPassword(redisPassword);
     return config;
   }
 

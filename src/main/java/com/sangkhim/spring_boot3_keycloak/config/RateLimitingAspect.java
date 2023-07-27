@@ -30,7 +30,7 @@ public class RateLimitingAspect {
                 Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
             .getRequest();
     String ip = HttpUtils.getRequestIP(request);
-    Bucket bucket = rateLimitConfig.resolveBucket("ip-" + ip);
+    Bucket bucket = rateLimitConfig.resolveBucket(ip + "-" + request.getRequestURI());
     if (bucket.tryConsume(1)) {
       return joinPoint.proceed();
     } else {
