@@ -4,7 +4,6 @@ import com.sangkhim.spring_boot3_keycloak.model.entity.Author;
 import com.sangkhim.spring_boot3_keycloak.service.AuthorService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +18,19 @@ public class AuthorController {
   @GetMapping("/v1/authors")
   public ResponseEntity<List<Author>> getAllAuthors() {
     List<Author> list = service.getAllAuthors();
-    return new ResponseEntity<>(list, new HttpHeaders(), HttpStatus.OK);
+    return new ResponseEntity<>(list, HttpStatus.OK);
   }
 
   @GetMapping("/v1/authors/{id}")
   public ResponseEntity<Author> getAuthorById(@PathVariable("id") Long id) {
     Author entity = service.getById(id);
-    return new ResponseEntity<>(entity, new HttpHeaders(), HttpStatus.OK);
+    return new ResponseEntity<>(entity, HttpStatus.OK);
   }
 
   @PostMapping("/v1/authors")
   public ResponseEntity<Author> createOrUpdate(@RequestBody Author Author) {
     Author updated = service.createOrUpdate(Author);
-    return new ResponseEntity<>(updated, new HttpHeaders(), HttpStatus.OK);
+    return new ResponseEntity<>(updated, HttpStatus.OK);
   }
 
   @DeleteMapping("/v1/authors/{id}")
