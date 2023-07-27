@@ -28,13 +28,6 @@ public class RateLimitingAspect {
   public void aroundAdvice(ProceedingJoinPoint joinPoint) {
     HttpServletRequest request =
         ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-
-    LOG.warn(
-        "Rate limit exceeded for IP: "
-            + HttpUtils.getRequestIP(request)
-            + " - "
-            + request.getRequestURI());
-
     String ip = HttpUtils.getRequestIP(request);
     Bucket bucket = rateLimitConfig.resolveBucket("ip-" + ip);
     if (bucket.tryConsume(1)) {
