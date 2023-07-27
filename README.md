@@ -18,6 +18,8 @@
 
     docker run --name redis -p 16379:6379 -d redis:7.0.12 --requirepass p@123456
 
+    https://redis.com/redis-enterprise/redis-insight/
+
 ## Jenkins
     docker run -p 18090:8080 -p 50000:50000 jenkins/jenkins:lts
     
