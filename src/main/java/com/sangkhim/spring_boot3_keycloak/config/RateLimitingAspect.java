@@ -5,6 +5,7 @@ import com.sangkhim.spring_boot3_keycloak.utils.HttpUtils;
 import io.github.bucket4j.Bucket;
 import jakarta.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,7 +28,9 @@ public class RateLimitingAspect {
   @Around(value = "execution(* com.sangkhim.spring_boot3_keycloak.controller..*(..))")
   public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
     HttpServletRequest request =
-        ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        ((ServletRequestAttributes)
+                Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
+            .getRequest();
     String ip = HttpUtils.getRequestIP(request);
     Bucket bucket = rateLimitConfig.resolveBucket("ip-" + ip);
     if (bucket.tryConsume(1)) {
