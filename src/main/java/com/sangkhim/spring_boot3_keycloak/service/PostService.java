@@ -14,9 +14,8 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -24,9 +23,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PostService {
-
-  private final Logger LOG = LoggerFactory.getLogger(getClass());
 
   private final ModelMapper modelMapper;
 
@@ -38,7 +36,7 @@ public class PostService {
 
   @Cacheable(value = "posts")
   public List<Post> getAllPosts(String title) {
-    LOG.info("Getting posts.");
+    log.info("Getting posts.");
 
     Page<Post> postListWithPagination =
         postRepository.findAllPostsWithPagination(PageUtils.pageable(1, 10, "title", "ASC"));
@@ -54,7 +52,7 @@ public class PostService {
 
   @Cacheable(value = "posts", key = "#id")
   public Post getById(Long id) {
-    LOG.info("Getting post with ID {}.", id);
+    log.info("Getting post with ID {}.", id);
 
     return postRepository
         .findById(id)
@@ -66,7 +64,7 @@ public class PostService {
 
   @CacheEvict(value = "posts", allEntries = true)
   public Post createOrUpdate(PostDTO postRequest) {
-    LOG.info("Create or update post with id {}", postRequest.getId());
+    log.info("Create or update post with id {}", postRequest.getId());
 
     Optional<Post> existingPost = postRepository.findById(postRequest.getId());
 
@@ -136,7 +134,7 @@ public class PostService {
 
   @CacheEvict(value = "posts", allEntries = true)
   public void deleteById(Long id) {
-    LOG.info("Delete post with id {}", id);
+    log.info("Delete post with id {}", id);
 
     Optional<Post> post = postRepository.findById(id);
     if (post.isPresent()) {

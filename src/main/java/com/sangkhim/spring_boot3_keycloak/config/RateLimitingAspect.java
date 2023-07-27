@@ -7,11 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,9 +18,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class RateLimitingAspect {
-
-  private final Logger LOG = LoggerFactory.getLogger(getClass());
 
   private final RateLimitConfig rateLimitConfig;
 
@@ -39,7 +37,7 @@ public class RateLimitingAspect {
       String message =
           MessageFormat.format(
               "Rate limit exceeded for IP {0} - {1}", String.valueOf(ip), request.getRequestURI());
-      LOG.warn(message);
+      log.warn(message);
       throw new TooManyRequestsException(message);
     }
   }
