@@ -3,7 +3,7 @@ package com.sangkhim.spring_boot3_keycloak;
 import java.util.Iterator;
 import javax.cache.Caching;
 import javax.cache.spi.CachingProvider;
-import org.ehcache.jsr107.EhcacheCachingProvider;
+import org.redisson.jcache.JCachingProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -20,7 +20,7 @@ public class SpringBoot3KeycloakApplication {
         Caching.getCachingProviders(Caching.getDefaultClassLoader()).iterator();
     while (iterator.hasNext()) {
       CachingProvider provider = iterator.next();
-      if (!(provider instanceof EhcacheCachingProvider)) {
+      if (!(provider instanceof JCachingProvider)) {
         iterator.remove();
       }
     }
