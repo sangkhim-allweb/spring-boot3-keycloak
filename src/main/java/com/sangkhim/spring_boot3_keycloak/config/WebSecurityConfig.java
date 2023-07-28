@@ -17,8 +17,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-  public static final String ADMIN = "admin";
-  public static final String USER = "user";
+  public static final String ROLE_ADMIN = "admin";
+  public static final String ROLE_USER = "user";
+
   private final JwtAuthConverter jwtAuthConverter;
 
   @Bean
@@ -42,9 +43,9 @@ public class WebSecurityConfig {
         .authorizeHttpRequests(
             rmr ->
                 rmr.requestMatchers("/v1/authors/**", "/v1/tags/**")
-                    .hasRole(ADMIN)
+                    .hasRole(ROLE_ADMIN)
                     .requestMatchers("/v1/authors/**", "/v1/tags/**")
-                    .hasAnyRole(ADMIN, USER)
+                    .hasAnyRole(ROLE_ADMIN, ROLE_USER)
                     .requestMatchers("/v1/**")
                     .authenticated());
 
