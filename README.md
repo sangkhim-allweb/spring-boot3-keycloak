@@ -1,4 +1,4 @@
-# spring-boot3-keycloak
+# Spring Boot 3 Keycloak, Redis Cache & Rate Limiting
 
 ## swagger
     http://localhost:8080/api/
